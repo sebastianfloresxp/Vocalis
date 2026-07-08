@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Join Vocalis as a mentor, mentee, leader, or chapter founder.">
+    <title>Join | Vocalis</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body data-page="join">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <canvas id="network-canvas" aria-hidden="true"></canvas>
+    <div class="page-transition" aria-hidden="true"><span></span></div>
+    <header class="site-header" data-site-header>
+      <a class="brand" href="index.html" aria-label="Vocalis home" data-transition><img class="brand-logo" src="Vocalis Logo.png" alt="Vocalis"></a>
+      <nav class="primary-nav" aria-label="Primary navigation">
+        <a href="about.html" data-transition>About</a>
+        <a href="team.html" data-transition>Team</a>
+        <a href="partners.html" data-transition>Partners</a>
+        <a href="join.html" data-transition>Join</a>
+        <a href="sponsors.html" data-transition>Sponsors</a>
+        <a href="donate.html" data-transition>Donate</a>
+      </nav>
+      <a class="header-action" href="join.html" data-transition>Join Vocalis <span aria-hidden="true">-&gt;</span></a>
+    </header>
+    <main id="main">
+      <section class="section join-section scroll-scene" aria-labelledby="join-title">
+        <div class="join-heading">
+          <p class="page-kicker">04 / Join Vocalis</p>
+          <h1 id="join-title">Where do you<br>enter the network?</h1>
+        </div>
+        <div class="pathway-field" data-pathway-field>
+          <svg class="pathway-lines" aria-hidden="true"></svg>
+          <button class="pathway-node" type="button" data-pathway="High School Mentor" style="--x: 18%; --y: 30%;">
+            <span>High school mentor</span>
+            <small>Use your experience to guide younger students as they explore ideas, interests, and ambitious projects.</small>
+          </button>
+          <button class="pathway-node" type="button" data-pathway="Professional Mentor" style="--x: 70%; --y: 24%;">
+            <span>Professional mentor</span>
+            <small>Help young people scale ideas into real-world solutions.</small>
+          </button>
+          <button class="pathway-node" type="button" data-pathway="Middle School Mentee" style="--x: 34%; --y: 64%;">
+            <span>Middle school mentee</span>
+            <small>Explore your interests, develop ambitious ideas, and connect with students and mentors ready to help you build.</small>
+          </button>
+          <button class="pathway-node" type="button" data-pathway="Leadership Team" style="--x: 82%; --y: 67%;">
+            <span>Leadership team</span>
+            <small>Help shape the systems, partnerships, programs, and future direction of Vocalis.</small>
+          </button>
+          <button class="pathway-node" type="button" data-pathway="Start a Chapter" style="--x: 52%; --y: 42%;">
+            <span>Start a chapter</span>
+            <small>Bring the Vocalis network to your school or community.</small>
+          </button>
+          <button class="gradient-button begin-application" type="button" data-application-open>Begin application <span aria-hidden="true">-&gt;</span></button>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="application-dialog" data-application-dialog aria-labelledby="application-title">
+      <form method="dialog" class="dialog-panel" data-application-form>
+        <button class="icon-close" type="button" data-dialog-close aria-label="Close application">x</button>
+        <p class="eyebrow">Vocalis application</p>
+        <h2 id="application-title">Begin application</h2>
+        <label>
+          Name
+          <input name="name" autocomplete="name" required>
+        </label>
+        <label>
+          Email
+          <input name="email" type="email" autocomplete="email" required>
+        </label>
+        <label>
+          Pathway
+          <select name="pathway" data-pathway-select>
+            <option>High School Mentor</option>
+            <option>Professional Mentor</option>
+            <option>Middle School Mentee</option>
+            <option>Leadership Team</option>
+            <option>Start a Chapter</option>
+          </select>
+        </label>
+        <label>
+          Why are you interested?
+          <textarea name="message" rows="4"></textarea>
+        </label>
+        <button class="gradient-button" type="submit">Send application draft <span aria-hidden="true">-&gt;</span></button>
+      </form>
+    </dialog>
+
+    <footer class="site-footer compact-footer">
+      <div class="footer-line" aria-hidden="true"></div>
+      <div class="footer-brand"><a class="brand" href="index.html" data-transition><img class="brand-logo" src="Vocalis Logo.png" alt="Vocalis"></a><p>Turning passion into impact.</p></div>
+      <div class="footer-bottom"><p>Copyright 2026 Vocalis.</p></div>
+    </footer>
+    <script src="script.js"></script>
+  </body>
+</html>
