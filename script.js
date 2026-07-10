@@ -10,8 +10,9 @@
   let frame = 0;
 
   const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+  const smooth = (value) => value * value * (3 - 2 * value);
   const themes = {
-    home: { seed: 1.1, nodes: 34, orbit: 0.52, accent: "#55b7ff" },
+    home: { seed: 1.1, nodes: 78, orbit: 0.72, accent: "#55b7ff" },
     about: { seed: 2.4, nodes: 46, orbit: 0.44, accent: "#55b7ff" },
     team: { seed: 3.7, nodes: 40, orbit: 0.58, accent: "#9b61ff" },
     partners: { seed: 5.2, nodes: 52, orbit: 0.5, accent: "#ff3f66" },
@@ -159,6 +160,35 @@
     ctx.save();
     ctx.lineWidth = 1;
 
+    if (page === "home") {
+      for (let i = 0; i < 10; i++) {
+        const orbit = Math.min(width, height) * (0.18 + i * 0.055 + Math.sin(ratio * Math.PI) * 0.08);
+        ctx.globalAlpha = 0.11 + Math.sin(frame * 0.015 + i) * 0.045;
+        ctx.strokeStyle = i % 3 === 0 ? "rgba(85,183,255,0.42)" : i % 3 === 1 ? "rgba(155,97,255,0.36)" : "rgba(255,63,102,0.32)";
+        ctx.save();
+        ctx.translate(width * (0.5 + Math.sin(ratio * 2 + i) * 0.08), height * (0.48 + Math.cos(ratio * 2 + i) * 0.05));
+        ctx.rotate(frame * (0.0009 + i * 0.00013) + ratio * 2.8 + i * 0.4);
+        ctx.scale(1.1 + i * 0.035, 0.18 + i * 0.045);
+        ctx.beginPath();
+        ctx.arc(0, 0, orbit, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      for (let i = 0; i < 9; i++) {
+        const startX = width * positivePseudo(i + 200);
+        const startY = height * positivePseudo(i + 220);
+        const endX = width * (0.5 + Math.sin(i + ratio * 5) * 0.28);
+        const endY = height * (0.48 + Math.cos(i * 0.7 + ratio * 4) * 0.24);
+        ctx.globalAlpha = 0.1 + ratio * 0.12;
+        ctx.strokeStyle = gradient(startX, startY, endX, endY);
+        ctx.beginPath();
+        ctx.moveTo(startX, startY);
+        ctx.bezierCurveTo(width * 0.18, height * 0.2, width * 0.82, height * 0.8, endX, endY);
+        ctx.stroke();
+      }
+    }
+
     if (page === "about") {
       for (let i = 0; i < 6; i++) {
         const x = width * (0.12 + i * 0.15);
@@ -256,8 +286,18 @@
     document.querySelectorAll(".scroll-scene").forEach((scene) => {
       const rect = scene.getBoundingClientRect();
       const range = Math.max(rect.height - window.innerHeight, rect.height * 0.58, 1);
-      const progress = clamp(-rect.top / range, 0, 1);
+      const speed = Number(scene.dataset.progressSpeed || 1);
+      const offset = Number(scene.dataset.progressOffset || 0);
+      const progress = clamp((-rect.top / range) * speed + offset, 0, 1);
+      const gatherStart = Number(scene.dataset.gatherStart || 0.04);
+      const gatherEnd = Number(scene.dataset.gatherEnd || 0.54);
+      const releaseStart = Number(scene.dataset.releaseStart || 0.76);
+      const releaseEnd = Number(scene.dataset.releaseEnd || 1);
+      const gather = smooth(clamp((progress - gatherStart) / Math.max(gatherEnd - gatherStart, 0.01), 0, 1));
+      const release = smooth(clamp((progress - releaseStart) / Math.max(releaseEnd - releaseStart, 0.01), 0, 1));
       scene.style.setProperty("--progress", progress.toFixed(4));
+      scene.style.setProperty("--gather", gather.toFixed(4));
+      scene.style.setProperty("--release", release.toFixed(4));
     });
   }
 
@@ -273,6 +313,7 @@
 
   function initTransitions() {
     const overlay = document.querySelector(".page-transition");
+    const transitionMs = reduceMotion ? 0 : 820;
     if (sessionStorage.getItem("vocalis-transition") === "1") {
       sessionStorage.removeItem("vocalis-transition");
       document.body.classList.add("is-page-arriving");
@@ -280,7 +321,7 @@
       window.setTimeout(() => {
         document.body.classList.remove("is-page-arriving");
         overlay?.classList.remove("is-arriving");
-      }, reduceMotion ? 0 : 980);
+      }, transitionMs);
     }
 
     document.querySelectorAll("a[data-transition]").forEach((link) => {
@@ -293,7 +334,7 @@
         overlay?.classList.add("is-active");
         window.setTimeout(() => {
           window.location.href = url.href;
-        }, reduceMotion ? 0 : 980);
+        }, transitionMs);
       });
     });
   }
