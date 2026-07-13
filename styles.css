@@ -897,7 +897,8 @@ body.is-page-arriving .site-footer {
 
 .research-card {
   top: 14%;
-  right: 13%;
+  right: auto;
+  left: 10%;
 }
 
 .data-card {
@@ -935,8 +936,8 @@ body.is-page-arriving .site-footer {
 }
 
 .mentor-card {
-  top: 39%;
-  right: 6%;
+  top: 24%;
+  right: 8%;
 }
 
 .resource-card {
@@ -946,7 +947,8 @@ body.is-page-arriving .site-footer {
 
 .chapter-card {
   left: 50%;
-  top: 10%;
+  top: auto;
+  bottom: 8%;
   translate: -50% 0;
 }
 
@@ -1241,6 +1243,22 @@ body.is-page-arriving .site-footer {
   max-width: 390px;
   color: var(--muted);
   line-height: 1.6;
+}
+
+.network-language {
+  display: grid;
+  align-content: center;
+  min-height: 500px;
+}
+
+.network-language h3 {
+  margin-top: 58px;
+  max-width: 620px;
+}
+
+.network-language p {
+  max-width: 560px;
+  font-size: clamp(1.02rem, 1.55vw, 1.22rem);
 }
 
 .project-interface dl {
