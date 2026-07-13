@@ -745,7 +745,7 @@ body.is-page-arriving .site-footer {
 
 .constellation {
   display: block;
-  min-height: 260svh;
+  min-height: 285svh;
   padding: 0;
   overflow: visible;
 }
@@ -852,10 +852,10 @@ body.is-page-arriving .site-footer {
   backdrop-filter: blur(14px);
   box-shadow: 0 18px 80px rgba(0, 0, 0, 0.36);
   overflow: hidden;
-  opacity: clamp(0, calc(var(--gather, var(--progress, 0)) * 2.3 - 0.14), 1);
+  opacity: clamp(0, calc(var(--gather, var(--progress, 0)) * 1.45 - 0.28), 1);
   transform:
-    translate3d(calc((1 - var(--gather, var(--progress, 0))) * var(--from-x)), calc((1 - var(--gather, var(--progress, 0))) * var(--from-y) + var(--release, 0) * -20vh), 0)
-    scale(calc(0.82 + var(--gather, var(--progress, 0)) * 0.18 - var(--release, 0) * 0.035));
+    translate3d(calc((1 - var(--gather, var(--progress, 0))) * var(--from-x)), calc((1 - var(--gather, var(--progress, 0))) * var(--from-y) + var(--release, 0) * -6vh), 0)
+    scale(calc(0.82 + var(--gather, var(--progress, 0)) * 0.18 - var(--release, 0) * 0.012));
   will-change: transform, opacity;
 }
 
@@ -902,7 +902,7 @@ body.is-page-arriving .site-footer {
 }
 
 .data-card {
-  top: 37%;
+  top: 46%;
   left: 8%;
   border-color: rgba(255, 63, 102, 0.44);
 }
@@ -931,13 +931,13 @@ body.is-page-arriving .site-footer {
 }
 
 .project-card {
-  right: 10%;
+  right: 4%;
   bottom: 16%;
 }
 
 .mentor-card {
   top: 24%;
-  right: 8%;
+  right: 4%;
 }
 
 .resource-card {
@@ -946,10 +946,11 @@ body.is-page-arriving .site-footer {
 }
 
 .chapter-card {
-  left: 50%;
-  top: auto;
-  bottom: 8%;
-  translate: -50% 0;
+  left: auto;
+  right: 31%;
+  top: 44%;
+  bottom: auto;
+  translate: none;
 }
 
 .home-nexus {

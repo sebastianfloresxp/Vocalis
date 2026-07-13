@@ -8,6 +8,7 @@
   let height = 0;
   let dpr = 1;
   let frame = 0;
+  let sceneUpdateQueued = false;
 
   const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
   const smooth = (value) => value * value * (3 - 2 * value);
@@ -301,6 +302,15 @@
     });
   }
 
+  function requestSceneUpdate() {
+    if (sceneUpdateQueued) return;
+    sceneUpdateQueued = true;
+    requestAnimationFrame(() => {
+      sceneUpdateQueued = false;
+      updateScenes();
+    });
+  }
+
   function setActiveNav() {
     const path = location.pathname.split("/").pop() || "index.html";
     document.querySelectorAll(".primary-nav a").forEach((link) => {
@@ -472,9 +482,9 @@
 
   window.addEventListener("resize", () => {
     resizeCanvas();
-    updateScenes();
+    requestSceneUpdate();
   });
-  window.addEventListener("scroll", updateScenes, { passive: true });
+  window.addEventListener("scroll", requestSceneUpdate, { passive: true });
   window.addEventListener("pointermove", (event) => {
     pointer.x = event.clientX;
     pointer.y = event.clientY;
